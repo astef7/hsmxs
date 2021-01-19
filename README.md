@@ -93,7 +93,7 @@ Relevant sections are `hsm` and `rest`:
 
 `buff_max` controls maximum load on the HSM buffer. This is mandatory mechanism when accessing Thales HSM. `hsmxs` tracks buffer usage with each command exchanged with HSM. If sending the command would exceed the limit, `hsmxs` will respond with `{error,buff_overflow}`. You can lower the default value, however trying to set value higher than 32000 will be superseded with this value anyway.
 
-`ip` and 'port` are HSM address parameters.
+`ip` and `port` are HSM address parameters.
 
 `rest` section with its `port` param describes the `elli` WEB server port established on the local interface. By default, the WEB server is started on 8087 port.
 
