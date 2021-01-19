@@ -1,0 +1,7 @@
+HsmPubKeySpec DEFINITIONS::=
+BEGIN
+  HsmPubKey ::= SEQUENCE {
+    modulus INTEGER,
+    exponent INTEGER
+  }
+END

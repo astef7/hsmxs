@@ -1,0 +1,17 @@
+{application, hsmxs,
+ [{description, "Thales 9000 REST Interface"},
+  {vsn, "1.0.0"},
+  {registered, []},
+  {mod, {hsmxs_app, []}},
+  {applications,
+   [kernel,
+    stdlib
+    % wx,
+    % observer
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.

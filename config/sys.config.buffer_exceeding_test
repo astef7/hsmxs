@@ -1,0 +1,12 @@
+%% Standard parameters.
+[{kernel,[
+	  {logger,
+	   [{handler, default, logger_std_h,
+	     #{formatter => {logger_formatter,
+			     #{template => [time,"|",level,"|",pid,"|",msg,"\n"]}}}
+	    }]}
+	 ]},
+ {hsm,[{buff_max,33000},
+       {ip,{10,10,104,25}},
+       {port,1500}]},
+ {rest,[port,8087]}].
