@@ -11,7 +11,7 @@ Overview
 
 This is an OTP Application for communication with Thales 9000 HSM. It provides a high level HTTP REST-based interface for selected cryptographic services, hiding most of the specifics of Thales commands and communication. It is a simplified version of HSM-Router application, that provides additional features for high-available traffic management to multiple HSM nodes.
 
-REST interface is JSON-based and defined in [yaml specification](). WEB server is implemented using embedded [elli HTTP Library](https://github.com/elli-lib/elli). Requests conforming to the yaml specification can be sent by any client (e.g. Python, Java). For convenience (and eunit testing purposes), a simple client `rest_client.erl` is provided.
+REST interface is JSON-based and defined in [yaml specification](https://github.com/astef7/hsmxs/blob/master/hsmxs-api-1.0.0.yaml). WEB server is implemented using embedded [elli HTTP Library](https://github.com/elli-lib/elli). Requests conforming to the yaml specification can be sent by any client (e.g. Python, Java). For convenience (and eunit testing purposes), a simple client `rest_client.erl` is provided.
 
 HSM communication
 -----------------
@@ -32,7 +32,7 @@ HTTP REST interface provides the following services:
 - import of client-generated 3DES/AES key under HSM LMK for establishing session key. Client key is encrypted under pre-established RSA key (`set-session-key`)
 - generation of 3DES/AES key for export to the client. Key is encrypted under previously established session key (`generate-bkey`)
 
-Message definitions are provided in [yaml specification]().
+Message definitions are provided in [yaml specification](https://github.com/astef7/hsmxs/blob/master/hsmxs-api-1.0.0.yaml).
 
 These simple services set foundation for establishing HSM-managed security scheme for mobile applications. Such scheme works on the following basis:
 
@@ -109,7 +109,7 @@ Starting `hsmxs` application with rebar3:
 ~/hsmxs$ rebar3 shell
 ```
 
-After `hsmxs` is started, you can test it using any tool sending REST/Json messages conforming to [yaml specification]().
+After `hsmxs` is started, you can test it using any tool sending REST/Json messages conforming to [yaml specification](https://github.com/astef7/hsmxs/blob/master/hsmxs-api-1.0.0.yaml).
 
 It is also possible to use a simple REST client module [elli_client.erl](). It consists of pre-configured code to invoke certain `hsmxs` services.
 
