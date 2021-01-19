@@ -55,12 +55,10 @@ handle('POST',[<<"hsmrt">>,<<"set-pin-pvv">>],#req{body=Body}=_Req)->
 	%% ------------ PBLK->PIN/LMK ---------------------------
 	CMD2=commands:build_cmd_JC(kblk,TPK,MPinBlk,01,PAN),
 	{ok,PINLMK}=commands:execute(CMD2),
-	io:format("JC PINLMK=[~p]~n",[PINLMK]),
 
 	%% ------------ Generate PVV ----------------------------
 	CMD3=commands:build_cmd_DG(kblk,Pvk,PAN,PINLMK),
 	{ok,PVV}=commands:execute(CMD3),
-	io:format("DG PVV=[~p]~n",[PVV]),
 
 	RespMap = #{ <<"pvv">> => PVV},
 	{ok,[],jsx:encode(RespMap,[{space,2},{indent,4}])}
@@ -104,7 +102,7 @@ handle('POST',[<<"hsmrt">>,<<"check-pin-pvv">>],#req{body=Body}=_Req)->
 	CMD3=commands:build_cmd_DC(kblk,Pvk,TPK,PAN,Pvv,MPinBlk,01),
 	case commands:execute(CMD3) of
 	    {ok} ->
-		io:format("DC Sucess~n",[]),
+		logger:debug("DC Sucess~n",[]),
 		{ok,[],[]};
 	    {error,_ER} ->
 		{404,[],<<"bad pvv">>}
@@ -164,8 +162,6 @@ handle('POST',[<<"hsmrt">>,<<"decrypt-dek">>],#req{body=Body}=_Req)->
 		_ -> hex:bin_to_hex(<<13:128>>) %% default IV
 	    end,
 	{ok,Dek}=maps:find(<<"dek">>,Json),
-	
-io:format("Callback: Iv=~p~n",[Iv]),
 
 	%% ------------ Decrypt ----------------------------
 	CMD=commands:build_cmd_M2(kblk,cbc,{dek,Dek},Iv,hex:hex_to_bin(Encrypted)),
@@ -208,7 +204,6 @@ handle('POST',[<<"hsmrt">>,<<"generate-dcvv">>],#req{body=Body}=_Req)->
 	%% ------------ Generate DCVV ----------------------------
 	CMD=commands:build_cmd_PM(kblk,generate,{Pan,Expdt,"111"},{TwuDefault,Mkdcvv}),
 	{ok,DCVV}=commands:execute(CMD),
-	io:format("PM DCVV=[~p]~n",[DCVV]),
 
 	RespMap = #{ <<"dcvv">> => DCVV},
 	{ok,[],jsx:encode(RespMap,[{space,2},{indent,4}])}
@@ -243,7 +238,7 @@ handle('POST',[<<"hsmrt">>,<<"check-dcvv">>],#req{body=Body}=_Req)->
 	CMD=commands:build_cmd_PM(kblk,verify,{Pan,Expdt,Dcvv},{TwuDefault,Mkdcvv}),
 	case commands:execute(CMD) of
 	    {ok} ->
-		io:format("PM Sucess~n",[]),
+		logger:debug("PM Sucess~n",[]),
 		{ok,[],[]};
 	    {error,_ER} ->
 		{404,[],<<"bad dcvv">>}

@@ -1,0 +1,540 @@
+#########################################
+openapi: 3.0.2
+#########################################
+
+#########################################
+info:
+  #########################################
+  title: HSMXS interface for external applications
+  description: HSMXS interface for external applications
+  contact:
+    name: Artur Stefanowicz (C)
+    email: artur.stefanowicz7@gmail.com
+  version: 1.0.0
+
+#########################################
+servers:
+  #########################################
+  - url: http://localhost:3000/api/rest/1.0
+    description: local server
+
+#########################################
+paths:
+  #########################################
+
+  /hsmrt/generate-dcvv:
+    post:
+      summary: Generate DCVV
+      operationId: generateDcvv
+      requestBody:
+        $ref: '#/components/requestBodies/generateDcvvSubmitPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/generateDcvvPost200'
+        '400':
+          $ref: '#/components/responses/post400'
+        '401':
+          $ref: '#/components/responses/post401'
+        '404':
+          $ref: '#/components/responses/post404'
+
+  /hsmrt/check-dcvv:
+    post:
+      summary: Check DCVV
+      operationId: checkDcvv
+      requestBody:
+        $ref: '#/components/requestBodies/checkDcvvSubmitPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/checkDcvvPost200'
+        '400':
+          $ref: '#/components/responses/post400'
+        '401':
+          $ref: '#/components/responses/post401'
+        '404':
+          $ref: '#/components/responses/post404'
+
+  /hsmrt/set-pin-pvv:
+    post:
+      summary: Generate PVV PIN std. ABA VISA
+      operationId: setPinPvv
+      requestBody:
+        $ref: '#/components/requestBodies/setPinPvvSubmitPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/setPinPvvPost200'
+        '400':
+          $ref: '#/components/responses/post400'
+        '401':
+          $ref: '#/components/responses/post401'
+        '404':
+          $ref: '#/components/responses/post404'
+
+  /hsmrt/check-pin-pvv:
+    post:
+      summary: Check PVV PIN std. ABA VISA
+      operationId: checkPinPvv
+      requestBody:
+        $ref: '#/components/requestBodies/checkPinPvvSubmitPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/checkPinPvvPost200'
+        '400':
+          $ref: '#/components/responses/post400'
+        '401':
+          $ref: '#/components/responses/post401'
+        '404':
+          $ref: '#/components/responses/post404'
+
+  /hsmrt/encrypt-dek:
+    post:
+      summary: Encrypt plain under DEK
+      operationId: encryptDek
+      requestBody:
+        $ref: '#/components/requestBodies/encryptDekSubmitPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/encryptDekPost200'
+        '400':
+          $ref: '#/components/responses/post400'
+        '401':
+          $ref: '#/components/responses/post401'
+        '404':
+          $ref: '#/components/responses/post404'
+
+  /hsmrt/decrypt-dek:
+    post:
+      summary: Decrypt plain under DEK
+      operationId: decryptDek
+      requestBody:
+        $ref: '#/components/requestBodies/decryptDekSubmitPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/decryptDekPost200'
+        '400':
+          $ref: '#/components/responses/post400'
+        '401':
+          $ref: '#/components/responses/post401'
+        '404':
+          $ref: '#/components/responses/post404'
+
+  /hsmrt/set-session-key:
+    post:
+      summary: Set session key
+      operationId: setSessionKey
+      requestBody:
+        $ref: '#/components/requestBodies/setSessionKeySubmitPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/setSessionKeyPost200'
+        '400':
+          $ref: '#/components/responses/post400'
+        '401':
+          $ref: '#/components/responses/post401'
+        '404':
+          $ref: '#/components/responses/post404'
+
+  /hsmrt/generate-bkey:
+    post:
+      summary: Generate bkey
+      operationId: generateBKey
+      requestBody:
+        $ref: '#/components/requestBodies/generateBKeySubmitPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/generateBKeyPost200'
+        '400':
+          $ref: '#/components/responses/post400'
+        '401':
+          $ref: '#/components/responses/post401'
+        '404':
+          $ref: '#/components/responses/post404'
+
+  #########################################
+
+#########################################
+components:
+  #########################################
+  responses:
+    # components.responses
+    post400:
+      description: Bad Request (global error)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GlobalErrorResponse'
+    post401:
+      description: Unauthorized (global error)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GlobalErrorResponse'
+    post404:
+      description: Not Found (global error)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GlobalErrorResponse'
+
+    generateDcvvPost200:
+      description: success response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenerateDcvvResponse'
+
+    checkDcvvPost200:
+      description: success response
+      content:
+        application/json:
+          schema:
+            type: object
+
+    setPinPvvPost200:
+      description: success response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SetPinPvvResponse'
+
+    checkPinPvvPost200:
+      description: success response
+      content:
+        application/json:
+          schema:
+            type: object
+
+    encryptDekPost200:
+      description: success response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EncryptDekResponse'
+
+    decryptDekPost200:
+      description: success response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DecryptDekResponse'
+
+    setSessionKeyPost200:
+      description: success response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SetSessionKeyResponse'
+
+    generateBKeyPost200:
+      description: success response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenerateBKeyResponse'
+
+  #################################################################
+  requestBodies:
+  #################################################################
+
+    generateDcvvSubmitPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenerateDcvvRequest'
+
+    checkDcvvSubmitPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CheckDcvvRequest'
+
+    setPinPvvSubmitPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SetPinPvvRequest'
+
+    checkPinPvvSubmitPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CheckPinPvvRequest'
+
+    encryptDekSubmitPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EncryptDekRequest'
+
+    decryptDekSubmitPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DecryptDekRequest'
+
+    setSessionKeySubmitPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SetSessionKeyRequest'
+
+    generateBKeySubmitPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenerateBKeyRequest'
+
+  #################################################################
+
+  schemas:
+    ######################################################
+    # components.schemas
+    GlobalErrorResponse:
+      description: Object represents secition with error structure
+      type: object
+      properties:
+        code:
+          description: Error code
+          type: string
+        message:
+          description: Error message
+          type: string
+
+    appid:
+      description: mobile application id
+      example: dcd42bbb38f54339a878e0f560554602
+      type: string
+      minLength: 32
+      maxLength: 32
+    pan:
+      description: card number
+      example: '4433221111111110'
+      type: string
+      minLength: 16
+      maxLength: 19
+    psn:
+      description: card seq
+      example: '1'
+      type: integer
+    expdt:
+      description: expiration date
+      example: '2012'
+      type: string
+      minLength: 4
+      maxLength: 4
+    dcvv:
+      description: dcvv
+      example: '314'
+      type: string
+      minLength: 3
+      maxLength: 3
+
+    MPinType:
+      type: object
+      properties:
+        mpinBlock:
+          type: string
+          #$ref: '#/components/schemas/MPinBlock'
+        mkeyBlock:
+          type: string
+          format: byte
+          #$ref: '#/components/schemas/MKeyBlock'
+        mkeyGuid:
+          type: string
+          #$ref: '#/components/schemas/MKeyGuid'
+
+    GenerateDcvvRequest:
+      description: GenerateDcvvRequest
+      type: object
+      required:
+        - appid
+        - pan
+        - psn
+        - expdt
+      properties:
+        appid:
+          $ref: '#/components/schemas/appid'
+        pan:
+          $ref: '#/components/schemas/pan'
+        psn:
+          $ref: '#/components/schemas/psn'
+        expdt:
+          $ref: '#/components/schemas/expdt'
+        mkdcvv:
+          type: string
+
+    GenerateDcvvResponse:
+      description: GenerateDcvvResponse
+      type: object
+      required:
+        - dcvv
+      properties:
+        dcvv:
+          $ref: '#/components/schemas/dcvv'
+
+    CheckDcvvRequest:
+      description: CheckDcvvRequest
+      type: object
+      required:
+        - appid
+        - pan
+        - psn
+        - expdt
+        - dcvv
+      properties:
+        appid:
+          $ref: '#/components/schemas/appid'
+        pan:
+          $ref: '#/components/schemas/pan'
+        psn:
+          $ref: '#/components/schemas/psn'
+        expdt:
+          $ref: '#/components/schemas/expdt'
+        dcvv:
+          type: string
+
+    SetPinPvvRequest:
+      description: SetPinPvvRequest
+      type: object
+      required:
+        - appId
+        - mpinBlock
+        - pvk
+      properties:
+        appId:
+          $ref: '#/components/schemas/appid'
+        mpinBlock:
+          $ref: '#/components/schemas/MPinType'
+        rsaOffset:
+          type: integer
+        pvk:
+          type: string
+
+    SetPinPvvResponse:
+      description: SetPinPvvRespnse
+      type: object
+      required:
+        - pvv
+      properties:
+        pvv:
+          type: string
+
+    CheckPinPvvRequest:
+      description: CheckPinPvvRequest
+      type: object
+      required:
+        - appId
+        - mpinBlock
+        - pvv
+        - pvk
+      properties:
+        appId:
+          $ref: '#/components/schemas/appid'
+        mpinBlock:
+          $ref: '#/components/schemas/MPinType'
+        rsaOffset:
+          type: integer
+        pvv:
+          type: string
+        pvk:
+          type: string
+
+    EncryptDekRequest:
+      description: EncryptDekRequest
+      type: object
+      required:
+        - appId
+        - text
+        - dek
+      properties:
+        appId:
+          $ref: '#/components/schemas/appid'
+        text:
+          type: string
+        dek:
+          type: string
+
+    EncryptDekResponse:
+      description: EncryptDekRespnse
+      type: object
+      properties:
+        encrypted:
+          type: string
+        iv:
+          type: string
+
+    DecryptDekRequest:
+      description: DecryptDekRequest
+      type: object
+      required:
+        - appId
+        - encrypted
+        - dek
+      properties:
+        appId:
+          $ref: '#/components/schemas/appid'
+        encrypted:
+          type: string
+        iv:
+          type: string
+        dek:
+          type: string
+
+    DecryptDekResponse:
+      description: DecryptDekRespnse
+      type: object
+      properties:
+        text:
+          type: string
+
+    SetSessionKeyRequest:
+      description: SetSessionKeyRequest
+      type: object
+      required:
+        - appId
+        - sessionKeyBLock
+        - sessionKeyGuid
+        - keyType
+        - rsaqOffset
+      properties:
+        appId:
+          $ref: '#/components/schemas/appid'
+        sessionKeyBLock:
+          type: string
+        sessionKeyGuid:
+          type: string
+        keyType:
+          type: string
+        rsaOffset:
+          type: integer
+
+    SetSessionKeyResponse:
+      description: SetSessionKeyRespnse
+      type: object
+      properties:
+        skey:
+          type: string
+
+    GenerateBKeyRequest:
+      description: GenerateBKeyRequest
+      type: object
+      required:
+        - appId
+        - keyType
+        - sessionKey
+      properties:
+        appId:
+          $ref: '#/components/schemas/appid'
+        keyType:
+          type: string
+        sessionKey:
+          type: string
+
+    GenerateBKeyResponse:
+      description: GenerateBKeyRespnse
+      type: object
+      properties:
+        bkey:
+          type: string
+        dek:
+          type: string
