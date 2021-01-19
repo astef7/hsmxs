@@ -111,7 +111,7 @@ Starting `hsmxs` application with rebar3:
 
 After `hsmxs` is started, you can test it using any tool sending REST/Json messages conforming to [yaml specification](https://github.com/astef7/hsmxs/blob/master/hsmxs-api-1.0.0.yaml).
 
-It is also possible to use a simple REST client module [elli_client.erl](). It consists of pre-configured code to invoke certain `hsmxs` services.
+It is also possible to use a simple REST client module [rest_client.erl](https://github.com/astef7/hsmxs/blob/master/src/rest_client.erl). It consists of pre-configured code to invoke certain `hsmxs` services.
 
 Some examples:
 
