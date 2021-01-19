@@ -73,7 +73,7 @@ HSM commands can use either keyblock or variant LMK keys.
 
 Additional libraries
 --------------------
-Apart from HSM communication support, application offers methods for pinblock formatting (`pinblk.erl') and basic symmetric cryptography used for pinblocks (`cryptoxs.erl`). Pinblock functions supports:
+Apart from HSM communication support, application offers methods for pinblock formatting (`pinblk.erl`) and basic symmetric cryptography used for pinblocks (`cryptoxs.erl`). Pinblock functions supports:
 - ISO 9564-1 Format 0 / ANSI X9.8
 - ISO 9564-1 Format 1
 - ISO 9564-1 Format 3
